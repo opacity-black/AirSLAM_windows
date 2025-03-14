@@ -1,3 +1,8 @@
+
+<p align="middle">
+  <img src="figures/airslam_vs_rtabmap.jpg" />
+</p>
+
 <h1 align="center">AirSLAM: An Efficient and Illumination-Robust Point-Line Visual SLAM System</h1>
 
 <p align="center"><strong>
