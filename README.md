@@ -59,13 +59,18 @@ challenges. Our system adopts a hybrid approach that combines deep learning tech
 * Boost
 
 ### Docker (Recommend)
+Windows系统用下面的命令，并且在这之前要下载VcXsrv （https://github.com/marchaesen/vcxsrv/releases）。
+
+怎么安装参考https://dev.to/darksmile92/run-gui-app-in-linux-docker-container-on-windows-host-4kde
 ```bash
 docker pull xukuanhit/air_slam:v4
-docker run -it --env DISPLAY=$DISPLAY --volume /tmp/.X11-unix:/tmp/.X11-unix --privileged --runtime nvidia --gpus all --volume ${PWD}:/workspace --workdir /workspace --name air_slam xukuanhit/air_slam:v4 /bin/bash
+docker run -it --env DISPLAY=host.docker.internal:0.0 --volume /tmp/.X11-unix:/tmp/.X11-unix --privileged --runtime nvidia --gpus all --volume ${PWD}:/workspace --workdir /workspace --name air_slam xukuanhit/air_slam:v4 /bin/bash
 ```
 
 ## :book: Data
 The data for mapping should be organized in the following Autonomous Systems Lab (ASL) dataset format (imu data is optional):
+
+可以下载这个数据集来测试：https://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets
 
 ```
 dataroot
@@ -93,9 +98,11 @@ After the map is built, the relocalization requires only monocular images. There
     cd ~/catkin_ws/src
     git clone https://github.com/sair-lab/AirSLAM.git
     cd ../
-    catkin_make
+    catkin_make        
     source ~/catkin_ws/devel/setup.bash
 ```
+这个命令跑完了注意workspace目录下有没有devel/lib，检查这个目录是不是空的，空的还要执行`catkin_make`。
+最后一句命令加载环境变量，ros才能读取到air_slam
 
 ## :running: Run 
 
